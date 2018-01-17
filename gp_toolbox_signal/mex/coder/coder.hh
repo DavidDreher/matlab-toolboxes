@@ -31,8 +31,8 @@
 #define _CODER_
 /*---------------------------------------------------------------------------*/
 #include <assert.h>
-#include <iostream.h>
-#include <iomanip.h>
+#include <iostream>
+#include <iomanip>
 #include "iHisto.h"
 #include "BitIO.h"
 #include "Arith.h"
@@ -46,7 +46,7 @@ public:
   ArithEncoder *arith;
   CdeltaEncode *intcoder;
 
-  Encoder  (ostream &out, ostream &log=cerr);
+  Encoder  (std::ostream &out, std::ostream &log=std::cerr);
   ~Encoder ();
 
   // write symbol
@@ -71,7 +71,7 @@ public:
   ArithDecoder *arith;
   CdeltaDecode *intcoder;
   
-  Decoder  (istream &in, ostream &log=cerr);
+  Decoder  (std::istream &in, std::ostream &log=std::cerr);
   ~Decoder ();
   
   int readSymbol (iHistogram *h) 

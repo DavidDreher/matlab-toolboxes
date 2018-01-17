@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <iostream.h>
+#include <iostream>
 #include <iomanip.h>
 #include "global.hh"
 #include "quantizer.hh"

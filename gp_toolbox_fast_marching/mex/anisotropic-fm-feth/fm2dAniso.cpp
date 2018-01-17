@@ -12,7 +12,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
 		mexErrMsgTxt("HERE T must be a 2D x 2x2 tensor field of symmetric definite matrices.");
 	//------------------------------------------------------------------
 	// First argument : spacing and dimensions
-	const int* dim_h = mxGetDimensions(prhs[0]);
+	const mwSize *dim_h = mxGetDimensions(prhs[0]);
     if ( (dim_h[0]!=2) || (dim_h[1]!=1) )
 	  mexErrMsgTxt("Library error: h must be a 2x1 array list.");
 	hx = mxGetPr(prhs[0])[0]; hy = mxGetPr(prhs[0])[1];
@@ -21,11 +21,12 @@ void mexFunction(	int nlhs, mxArray *plhs[],
 	hx2hy2 = hx*hx*hy*hy;
 	hx2_plus_hy2 = hx*hx + hy*hy;
     sqrt_hx2_plus_hy2 = sqrt(hx2_plus_hy2);
-    nx = mxGetDimensions(prhs[1])[0];
-	ny = mxGetDimensions(prhs[1])[1];
+    size_t nx = mxGetDimensions(prhs[1])[0];
+	const mwSize ny = mxGetDimensions(prhs[1])[1];
     if( (mxGetDimensions(prhs[1])[2] != 2) || (mxGetDimensions(prhs[1])[3] != 2) )
         mexErrMsgTxt("T must be a 2D x 2x2 tensor field of symmetric definite matrices.");
-	Nx = nx+2; Ny = ny+2;
+	size_t Nx = nx+2; 
+    size_t Ny = ny+2;
 	size = Nx*Ny; nxny = nx*ny;
 	//------------------------------------------------------------------
 	// Second argument : Anisotropy matrices 
@@ -42,7 +43,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
     	Dmax = (float) mxGetScalar(prhs[3]);
 	//==================================================================
 	// Outputs
-	int dims[2] = {Nx,Ny};
+	size_t dims[2] = {Nx,Ny};
 	// First output : minimal action map
 	plhs[0] = mxCreateNumericArray(2, dims, mxSINGLE_CLASS, mxREAL );
 	U = (float*) mxGetPr(plhs[0]);

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <iostream.h>
+#include <iostream>
 #include "global.hh"
 #include "image.hh"
 /*---------------------------------------------------------------------------*/

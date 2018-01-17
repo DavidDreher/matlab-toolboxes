@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
-#include <iostream.h>
+#include <iostream>
 #include <fstream.h>
 #include "transform.hh"
 #include "coeffset.hh"
@@ -198,7 +198,7 @@ void compress (Image *image, Wavelet *wavelet, int nStages,
   allocator->print (coeff, nSets);
 
   // Open output file
-  ofstream outfile (filename, ios::out | ios::trunc | ios::binary);
+  std::ofstream outfile (filename, ios::out | ios::trunc | ios::binary);
   if (!outfile) {
     error ("Unable to open file %s", filename);
   }

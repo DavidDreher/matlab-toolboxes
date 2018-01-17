@@ -10,7 +10,7 @@
 #ifndef _ARITH_CODER_
 #define _ARITH_CODER_
 
-#include <iostream.h>
+#include <iostream>
 #include "iHisto.h"
 #include "BitIO.h"
 

@@ -7,8 +7,8 @@
 // These objects implement arithmetic coding as described in
 // Bell, Cleary, and Witten "Text Compression" Prentice Hall.
 
-#include <iostream.h>
-#include <iomanip.h>
+#include <iostream>
+#include <iomanip>
 #include <assert.h>
 #include <math.h>
 #include "global.hh"

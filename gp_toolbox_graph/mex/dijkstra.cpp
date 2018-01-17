@@ -14,7 +14,7 @@
 extern void _main();
 
 #include <stdlib.h>
-#include <iostream.h>
+#include <iostream>
 #include <stdio.h>
 // #include <conio.h>
 #include <ctype.h>
@@ -70,7 +70,7 @@ extern void _main();
 //***************************************************************************
 
 #include <stdlib.h>
-#include <iostream.h>
+#include <iostream>
 #include <stdio.h>
 // #include <conio.h>
 
@@ -180,7 +180,7 @@ int X;
 void FibHeapNode::Print()
 {
      if (NegInfinityFlag)
-	 cout << "-inf.";
+	 std::cout << "-inf.";
 }
 
 //***************************************************************************
@@ -798,8 +798,8 @@ void dodijk_sparse(
              long int S,
              double   *D,
              double   *sr,
-             int      *irs,
-             int      *jcs,
+             size_t      *irs,
+             size_t      *jcs,
              HeapNode *A,
              FibHeap  *theHeap  )
 {
@@ -901,7 +901,7 @@ void mexFunction(
 		 )
 {
   double    *sr,*D,*P,*SS,*Dsmall,*Psmall;
-  int       *irs,*jcs;
+  size_t       *irs,*jcs;
   long int  M,N,S,MS,NS,i,j,in;
 
   HeapNode *A = NULL;

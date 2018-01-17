@@ -5,20 +5,20 @@
 //
 
 #include <stdlib.h>
-#include <iostream.h>
+#include <iostream>
 #include <assert.h>
 #include <math.h>
 #include "global.hh"
 #include "BitIO.h"
 
 
-BitIn::BitIn(istream &is, ostream &log) : input(is), bitLog(log)
+BitIn::BitIn(std::istream &is, std::ostream &log) : input(is), bitLog(log)
 {
     bitsInBuf = 0;
     bitCount = 0;
 }
 
-BitOut::BitOut(ostream &out, ostream &log) : output(out), bitLog(log)
+BitOut::BitOut(std::ostream &out, std::ostream &log) : output(out), bitLog(log)
 {
     bitsInBuf = 0;
     nBytes = 0;

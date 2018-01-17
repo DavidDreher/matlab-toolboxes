@@ -11,14 +11,14 @@
 // long as this notice stays attached to this software.
 //
 /*---------------------------------------------------------------------------*/
-#include <iostream.h>
+#include <iostream>
 #include <stdio.h>
 #include <math.h>
 #include "global.hh"
 #include "coder.hh"
 /*---------------------------------------------------------------------------*/
 
-Encoder::Encoder (ostream &out, ostream &log)
+Encoder::Encoder (std::ostream &out, std::ostream &log)
 {
    bitout   = new BitOut (out, log);
    arith    = new ArithEncoder (*bitout);
@@ -37,7 +37,7 @@ Encoder::~Encoder ()
 /*---------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------*/
 
-Decoder::Decoder (istream &in, ostream &log)
+Decoder::Decoder (std::istream &in, std::ostream &log)
 {
   bitin    = new BitIn (in, log);
   intcoder = new CdeltaDecode (bitin);

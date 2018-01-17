@@ -2,8 +2,8 @@
 %
 %   Copyright (c) 2007 Gabriel Peyre
 
-path(path,'toolbox/');
-path(path, 'images/');
+% path(path,'toolbox/');
+% path(path, 'images/');
 
 %% load the image
 name = 'lenacoul';

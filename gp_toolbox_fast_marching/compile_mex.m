@@ -1,18 +1,22 @@
+fprintf('Mexing fast marching toolbox');
+
 % compile mex file
 mex mex/perform_front_propagation_2d.cpp mex/perform_front_propagation_2d_mex.cpp mex/fheap/fib.cpp 
 mex mex/perform_front_propagation_3d.cpp mex/perform_front_propagation_3d_mex.cpp  mex/fheap/fib.cpp 
 mex mex/perform_circular_front_propagation_2d.cpp mex/perform_front_propagation_2d.cpp mex/fheap/fib.cpp 
 
 % anisotropic FM
-mex mex/anisotropic-fm//perform_front_propagation_anisotropic.cpp
+% mex mex/anisotropic-fm//perform_front_propagation_anisotropic.cpp
 mex mex/anisotropic-fm-feth/fm2dAniso.cpp
+warning('Disabled: perform_front_propagation_anisotropic.cpp')
+% mex mex/perform_front_propagation_anisotropic.cpp
 
 % compiling skeleton
 mex mex/skeleton.cpp
 % compiling distance transform
 mex mex/eucdist2.c
 
-disp('Compiling perform_front_propagation_mesh, might time some time.');
+disp('Compiling perform_front_propagation_mesh, might take some time.');
 rep = 'mex/';
 files =  { ...
     'perform_front_propagation_mesh.cpp', ...

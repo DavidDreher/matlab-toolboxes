@@ -1,7 +1,6 @@
-clear all;
-fprintf('Compiling mex files ... ');
+fprintf('Mexing image toolbox');
 
 % compile mex files
 mex mex/perform_adaptive_filtering.cpp
 
-disp('done.');
+disp('Done.');

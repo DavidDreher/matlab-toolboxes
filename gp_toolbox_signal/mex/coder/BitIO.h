@@ -9,7 +9,7 @@
 #define _BITIO_
 
 #include <stdlib.h>
-#include <iostream.h>
+#include <iostream>
 #include <assert.h>
 
 #define PRINTBITS 0
@@ -26,7 +26,7 @@
 
 class BitIn {
 public:
-    BitIn(istream &is, ostream &log=cerr);
+    BitIn(std::istream &is, std::ostream &log=std::cerr);
     inline int BitCount() { return bitCount; }
     inline int input_bit(void)
     {
@@ -34,7 +34,8 @@ public:
 	if (!bitsInBuf) {
 	    assert(!input.eof()); /* more bits to read */
 	    bitsInBuf = 8;
-	    input.get(bitBuf);
+        input.get(bitBuf);
+	    //bitBuf = input.get();
 	}
 		    
 	bit = (bitBuf & 128) >> 7;
@@ -56,11 +57,11 @@ public:
 	return input;
     }
 private:
-    unsigned char bitBuf;
+    char bitBuf;
     int bitsInBuf;
     int bitCount;
-    istream &input;    
-    ostream &bitLog;
+    std::istream &input;    
+    std::ostream &bitLog;
 };
 	
 
@@ -71,7 +72,7 @@ private:
 		
 class BitOut {
 public:
-    BitOut(ostream &out, ostream &log=cerr);
+    BitOut(std::ostream &out, std::ostream &log=std::cerr);
     inline int  BitCount() { return bitsInBuf + 8 * nBytes; }
 
     void output_bit(int bit)
@@ -95,11 +96,11 @@ public:
     inline BitOut& operator<<(int i) { output_bit(i); return *this; }
     void flush(void);
 private:
-    unsigned char bitBuf;
+    char bitBuf;
     int bitsInBuf;
     int nBytes;
-    ostream &output;
-    ostream &bitLog;
+    std::ostream &output;
+    std::ostream &bitLog;
 };
 
 #endif

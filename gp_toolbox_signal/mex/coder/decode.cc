@@ -92,7 +92,7 @@ void decompress (Image **image, Wavelet *wavelet, int nStages,
   int i;
 
   // open compressed image file
-  ifstream infile (filename, ios::in | ios::nocreate | ios::binary);
+  std::ifstream infile (filename, ios::in | ios::nocreate | ios::binary);
   if (!infile) {
     error ("Unable to open file %s", filename);
   }

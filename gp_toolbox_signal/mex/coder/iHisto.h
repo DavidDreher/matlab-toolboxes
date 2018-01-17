@@ -96,7 +96,7 @@ public:
     Real  Entropy(int sym)
     { return -log(Count(sym)/(Real)totalCount) * onelog2; }
 
-    void print(ostream &strm);   // print the object
+    void print(std::ostream &strm);   // print the object
     void printerr(void);        // print the object to stderr
 private:
 };

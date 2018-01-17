@@ -7,7 +7,7 @@
 %
 %   y = perform_arithmetic_coding_escape(x,dir,known_size,known_bounds);
 %   
-%   Copyright (c) 2006 Gabriel Peyré
+%   Copyright (c) 2006 Gabriel Peyrï¿½
 *=================================================================*/
 
 #define HISTO_CAPACITY 1024*16
@@ -30,8 +30,8 @@ void mexFunction(	int nlhs, mxArray *plhs[],
     if( nlhs!=1 ) 
         mexErrMsgTxt("1 output arguments are required."); 
 	// first argument : input array
-	int n = mxGetM(prhs[0]); 
-	int p = mxGetN(prhs[0]);
+	size_t n = mxGetM(prhs[0]); 
+	size_t p = mxGetN(prhs[0]);
     if( p>1 )
         mexErrMsgTxt("Works only for vector arrays."); 
     int dir = (int) *mxGetPr(prhs[1]);
@@ -59,7 +59,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
     {
         // compute range of the data
         int a = 1<<20, b = -(1<<20); 
-        for( int i=0; i<n; ++i )
+        for( size_t i=0; i<n; ++i )
         {
             if( x[i]<a )
                 a = (int) x[i];
@@ -71,7 +71,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
 			mexErrMsgTxt( "Too much symbols." );
 
         // Open output file
-        ofstream outfile(filename, ios::out | ios::trunc | ios::binary);
+        std::ofstream outfile(filename, std::ios::out | std::ios::trunc | std::ios::binary);
         if( !outfile )
             mexErrMsgTxt("Cannot open file."); 
         // Create I/O interface object for arithmetic coder
@@ -95,7 +95,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
             mexErrMsgTxt("The provided bound does not match the real size."); 
 
         // perform coding
-        for( int i=0; i<n; i++ ) 
+        for( size_t i=0; i<n; i++ ) 
         {
             // rescale to positive integers
             int symbol = (int) (x[i]-a);
@@ -140,7 +140,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
         fclose(fin);
 
         // open compressed image file
-        ifstream infile( filename, ios::in | ios::nocreate | ios::binary);
+        std::ifstream infile( filename, std::ios::in | std::ios::nocreate | std::ios::binary);
         if( !infile )
             error( "Unable to open file %s", filename );
         // Create I/O interface object for arithmetic decoder
@@ -169,7 +169,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
         plhs[0] = mxCreateNumericMatrix( n, 1, mxDOUBLE_CLASS, mxREAL );
         double* y = mxGetPr( plhs[0] );
 
-        for( int i=0; i<n; ++i ) 
+        for( size_t i=0; i<n; ++i ) 
         {
             int symbol = entropy->read( decoder, TRUE );
             assert( symbol<subrange && symbol >= 0);

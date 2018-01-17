@@ -6,8 +6,8 @@
 
 /*---------------------------------------------------------------------------*/
 #include <assert.h>
-#include <iostream.h>
-#include <iomanip.h>
+#include <iostream>
+#include <iomanip>
 
 #include "BitIO.h"
 #include "IntCoding.hh"
@@ -18,9 +18,9 @@
 /*---------------------------------------------------------------------------*/
 
 #if PrintBits
-#define PB(x) cerr << (x);
-#define PNL   cerr << "\n";
-#define PCol  cerr << ":";
+#define PB(x) std::cerr << (x);
+#define PNL   std::cerr << "\n";
+#define PCol  std::cerr << ":";
 #else
 #define PB(x)
 #define PNL
@@ -36,7 +36,7 @@ void CdeltaEncode::EncodePositive(int i)
   assert(i > 0 && i < (1 << 30));
   
 #if PRINTCALLS
-  cerr << "CdeltaEncode::EncodePositive(" << i << ")\n";
+  std::cerr << "CdeltaEncode::EncodePositive(" << i << ")\n";
 #endif
   
   for (digits = 30; digits > 0; digits--) {
@@ -67,7 +67,7 @@ void CdeltaEncode::EncodePositive(int i)
 void CdeltaEncode::EncodeNonNegative(int i)
 {
 #if PRINTCALLS
-  cerr << "CdeltaEncode::EncodeNonNegative(" << i << ")\n";
+  std::cerr << "CdeltaEncode::EncodeNonNegative(" << i << ")\n";
 #endif
   EncodePositive(i + 1);
 }
@@ -76,7 +76,7 @@ void CdeltaEncode::EncodeNonNegative(int i)
 void CdeltaEncode::Encode(int i)
 {
 #if PRINTCALLS
-  cerr << "CdeltaEncode::Encode(" << i << ")\n";
+  std::cerr << "CdeltaEncode::Encode(" << i << ")\n";
 #endif
   if (i < 0) {
     output->output_bit(1);
@@ -108,7 +108,7 @@ int CdeltaDecode::DecodePositive(void)
   PNL;
   
 #if PRINTCALLS
-  cerr << "CdeltaDecode::DecodePositive()->" << value << "\n";
+  std::cerr << "CdeltaDecode::DecodePositive()->" << value << "\n";
 #endif
   
   return value;
@@ -119,7 +119,7 @@ int CdeltaDecode::DecodeNonNegative(void)
 {
   int value = DecodePositive() - 1;
 #if PRINTCALLS
-  cerr << "CdeltaDecode::DecodeNonNegative()->" << value << "\n";
+  std::cerr << "CdeltaDecode::DecodeNonNegative()->" << value << "\n";
 #endif
   return value;
 }
@@ -136,7 +136,7 @@ int CdeltaDecode::Decode(void)
     value =  DecodeNonNegative();
   }
 #if PRINTCALLS
-  cerr << "CdeltaDecode::Decode()->" << value << "\n";
+  std::cerr << "CdeltaDecode::Decode()->" << value << "\n";
 #endif
   return value;
 }

@@ -12,7 +12,7 @@
 //
 /*---------------------------------------------------------------------------*/
 #include <stdio.h>
-#include <iostream.h>
+#include <iostream>
 #include <math.h>
 #include "global.hh"
 #include "entropy.hh"

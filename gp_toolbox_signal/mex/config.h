@@ -2,7 +2,7 @@
 /** 
 *  \file   config.h
 *  \brief  Main configuration file.
-*  \author Gabriel Peyré
+*  \author Gabriel Peyrï¿½
 *  \date   2004
 */ 
 /*------------------------------------------------------------------------------*/
@@ -122,7 +122,7 @@
 	#define GW_ASSERT(expr) _ASSERT(expr)
 	#define GW_DEBUG_ONLY(expr) expr
 #else
-	#define GW_ASSERT(expr)	// if(!(expr)) cerr << "Error in file " << __FILE__ << " line " << __LINE__ << "." << endl 
+	#define GW_ASSERT(expr)	// if(!(expr)) std::cerr << "Error in file " << __FILE__ << " line " << __LINE__ << "." << endl 
 	#define GW_DEBUG_ONLY(expr)
 #endif // GW_DEBUG
 //@}

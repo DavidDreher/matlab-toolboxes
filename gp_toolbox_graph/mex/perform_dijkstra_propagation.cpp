@@ -4,7 +4,7 @@
     D is the distance to starting points.
     S is the state : dead=-1, open=0, far=1.
     
-    Copyright (c) 2005 Gabriel Peyré
+    Copyright (c) 2005 Gabriel Peyrï¿½
 
 TODO : 
 * ajouter un tableau bool pour eventuellement restreindre la propagation (mettre null si pas restriction).
@@ -31,20 +31,20 @@ ou alors utiliser GW pour faire les calculs.
 #define kFar 1
 
 /* Global variables */
-int n;			// number of vertices
+size_t n;			// number of vertices
 double* D = NULL;
 double* S = NULL;
 double* W = NULL;
 double* start_points = NULL;
 double* end_points = NULL;
 double* H = NULL;
-int nb_iter_max = 100000;
-int nb_start_points = 0;
-int nb_end_points = 0;
+size_t nb_iter_max = 100000;
+size_t nb_start_points = 0;
+size_t nb_end_points = 0;
 fibheap_el** heap_pool = NULL;
 // sparse array
-int* irs = NULL; // returns a pointer to the row indices
-int* jcs = NULL;
+size_t* irs = NULL; // returns a pointer to the row indices
+size_t* jcs = NULL;
 
 typedef bool (*T_callback_insert_node)(int i, int ii);
 
@@ -62,8 +62,8 @@ bool end_points_reached(const int i)
 inline 
 int compare_points(void *x, void *y)
 {
-	int a = (int) x;
-	int b = (int) y;
+	size_t a = (size_t) x;
+	size_t b = (size_t) y;
 	if( H==NULL )
 		return cmp( D[a], D[b] );
 	else
@@ -77,7 +77,7 @@ void check_heap( int i )
 		{
 			if( heap_pool[x]!=NULL )
 			{
-				int j = (int) heap_pool[x]->fhe_data;
+				size_t j = (size_t) heap_pool[x]->fhe_data;
 				if( H==NULL )
 				{
 					if( D[i]>D[j] )
@@ -135,7 +135,7 @@ void perform_dijkstra_propagation(T_callback_insert_node callback_insert_node = 
 		num_iter++;
 
 		// current point
-		int i = (int) fh_extractmin( open_heap );
+		size_t i = (size_t) fh_extractmin( open_heap );
 		heap_pool[i] = NULL;
 		S[i] = kDead;
 		stop_iteration = end_points_reached(i);
@@ -230,7 +230,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
 	end_points = mxGetPr(prhs[2]);
 	nb_end_points = mxGetN(prhs[2]);
 	// third argument : nb_iter_max
-	nb_iter_max = (int) *mxGetPr(prhs[3]);
+	nb_iter_max = (size_t) *mxGetPr(prhs[3]);
 	// second argument : heuristic
 	if( nrhs==5 )
 	{

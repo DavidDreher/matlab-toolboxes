@@ -32,9 +32,9 @@ void mexFunction(	int nlhs, mxArray *plhs[],
 	// first argument : weight list
 	if( mxGetNumberOfDimensions(prhs[0])!= 3 )
 		mexErrMsgTxt("W must be a 3D array.");
-	n = mxGetDimensions(prhs[0])[0];
-	p = mxGetDimensions(prhs[0])[1];
-	q = mxGetDimensions(prhs[0])[2];
+	const mwSize n = mxGetDimensions(prhs[0])[0];
+	const mwSize p = mxGetDimensions(prhs[0])[1];
+	const mwSize q = mxGetDimensions(prhs[0])[2];
 	W = mxGetPr(prhs[0]);
 	// second argument : start_points
 	start_points = mxGetPr(prhs[1]);
@@ -83,7 +83,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
 		values = NULL;
 		
 	// first ouput : distance
-	int dims[3] = {n,p,q};
+	const mwSize dims[3] = {n,p,q};
 	plhs[0] = mxCreateNumericArray(3, dims, mxDOUBLE_CLASS, mxREAL );
 	D = mxGetPr(plhs[0]);
 	// second output : state

@@ -17,7 +17,7 @@
 %	Wx is the new center x position for next seach (center of best fit)
 %	Wy is the new center y position for next seach (center of best fit)
 %   
-%   Copyright (c) 2006 Gabriel PeyrŽ
+%   Copyright (c) 2006 Gabriel Peyrï¿½
 *=================================================================*/
 
 
@@ -48,10 +48,10 @@
 
 
 /* Global variables */
-int n = -1;	// width of M
-int m = -1;	// height of M
-int na = -1;	// width of Ma
-int ma = -1;	// height of Ma
+size_t n = -1;	// width of M
+size_t m = -1;	// height of M
+size_t na = -1;	// width of Ma
+size_t ma = -1;	// height of Ma
 double* M1 = NULL;	// output
 double* Ma = NULL;	// exemplar image to transfer 
 double* H = NULL;	// vectorized patches to denoise
@@ -64,8 +64,8 @@ double* mask_process = NULL;
 double* mask_copy = NULL;
 bool exclude_self = false;
 double* w = NULL;
-int k = -1;			// dimensionality of the vectorized patches H,Ha
-int s = -1;			// number of color chanels of M,Ma
+size_t k = -1;			// dimensionality of the vectorized patches H,Ha
+size_t s = -1;			// number of color chanels of M,Ma
 double T = 0.05f;	// width of the gaussian
 int max_dist = 10;	// max distance for searching
 bool do_median= false; // use L1 fit
@@ -86,9 +86,9 @@ inline void display_messagef(const char* mess, float v)
 }
 
 
-inline void get_dimensions( const mxArray* arr, int& a, int& b, int& c )
+inline void get_dimensions( const mxArray* arr, size_t& a, size_t& b, size_t& c )
 {
-	int nd = mxGetNumberOfDimensions(arr);
+	size_t nd = mxGetNumberOfDimensions(arr);
 	if( nd==3 )
 	{
 		a = mxGetDimensions(arr)[0];
@@ -199,7 +199,7 @@ double compute_weights(int i, int j, int i_min,int i_max,int j_min,int j_max)
 
 void denoise()
 {		
-	int i,j;
+	size_t i,j;
 	// allocate some space to do the sorting operation
 	pixel* vals = NULL;
 	if( do_median )
@@ -280,8 +280,8 @@ void denoise_patchwise()
 	double* Cac = (double*) malloc( m*n*s*sizeof(double) );
 	// clear the accumulation buffers
 	memset(Cac,0,m*n*s*sizeof(double));
-	for( int i=0; i<m; ++i ) // pixels of M
-	for( int j=0; j<n; ++j )
+	for( size_t i=0; i<m; ++i ) // pixels of M
+	for( size_t j=0; j<n; ++j )
 	{
 		CHECK_MASK_PROCESS(i,j)
 		{
@@ -295,8 +295,8 @@ void denoise_patchwise()
 		int j_max = GW_MIN(na-1,jc+max_dist);
 		// compute weight
 		double w_sum = compute_weights(i,j, i_min,i_max,j_min,j_max);
-		for( int i1=i_min; i1<=i_max; ++i1 )
-		for( int j1=j_min; j1<=j_max; ++j1 )
+		for( size_t i1=i_min; i1<=i_max; ++i1 )
+		for( size_t j1=j_min; j1<=j_max; ++j1 )
 		{
 			// all the correct points at distance wdist
 			int ti_min = -wdist;
@@ -328,9 +328,9 @@ void denoise_patchwise()
 	} // end if mask_process
 	}	
 	// normalize the result
-	for( int a=0; a<s; ++a )
-	for( int i=0; i<m; ++i ) // pixels of M
-	for( int j=0; j<n; ++j )
+	for( size_t a=0; a<s; ++a )
+	for( size_t i=0; i<m; ++i ) // pixels of M
+	for( size_t j=0; j<n; ++j )
 	{
 		CHECK_MASK_PROCESS(i,j)
 		{
@@ -360,7 +360,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
 	H = mxGetPr(prhs[1]);
 		
 	// -- input 3 : Ha --
-	int m1,n1,k1;
+	size_t m1,n1,k1;
 	get_dimensions( prhs[2], m1,n1,k1 );
 	if( na!=n1 || ma!=m1 || k!=k1  )
 		mexErrMsgTxt("Ha should be of same size as Ma."); 
@@ -428,7 +428,7 @@ void mexFunction(	int nlhs, mxArray *plhs[],
 
 	
 	// -- outpout 1 : M1 -- 
-	int dims[3] = {m,n,s};
+	size_t dims[3] = {m,n,s};
 	plhs[0] = mxCreateNumericArray(3, dims, mxDOUBLE_CLASS, mxREAL );	
 	M1 = mxGetPr(plhs[0]);
 	
